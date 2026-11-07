@@ -178,7 +178,35 @@ h2,h3{font-family:Shrikhand,'Cooper Black',Georgia,serif}
 .tabs{display:flex;justify-content:center;gap:8px;margin-bottom:22px;flex-wrap:wrap}
 .tab{padding:10px 16px;border-radius:99px;border:2px solid rgba(255,243,220,.4);background:rgba(42,20,10,.4);color:var(--cream);font:800 14px Poppins,sans-serif;cursor:pointer}
 .tab.on{background:var(--mustard);color:var(--ink);border-color:var(--mustard)}
-.host{text-align:center}
+.host{text-align:center;cursor:pointer;font:inherit;color:inherit;width:100%;display:block}
+.host:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.host .av.ph{width:128px;height:128px;padding:0;overflow:hidden;background:var(--mustard);box-shadow:0 0 0 4px var(--mustard),0 0 0 8px var(--choc),0 14px 26px rgba(0,0,0,.45);transition:transform .3s}
+.host .av.ph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+.host:hover .av.ph{transform:translateZ(40px) rotate(-4deg) scale(1.05)}
+.host .showname{font-weight:800;color:var(--cream);font-size:15px;margin-bottom:4px;transform:translateZ(20px)}
+.host .bio-hint{display:inline-block;margin-top:10px;font-weight:800;font-size:13px;color:var(--ink);background:var(--gold);padding:5px 12px;border-radius:99px;transform:translateZ(22px)}
+.host .slot small{font-size:12px;color:#f5dfc0;font-weight:600}
+@media (max-width:600px){.g-hosts{grid-template-columns:1fr 1fr;gap:10px}.host{padding:16px 8px}.host .av.ph{width:96px;height:96px}.host h3{font-size:18px}.host .showname{font-size:13px}.host .slot{font-size:12px}.host .bio-hint{font-size:12px;padding:4px 10px}}
+.feat-head{text-align:center;margin:44px 0 18px}
+.feat-head h3{font-size:clamp(24px,3.6vw,34px);color:var(--cream)}
+.feat-head p{color:#f5dfc0;font-size:15px}
+.bio-back{position:fixed;inset:0;z-index:110;background:rgba(20,8,2,.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
+.bio-back.on{opacity:1;pointer-events:auto}
+.bio-card{position:relative;width:min(480px,100%);max-height:88vh;overflow:auto;border-radius:30px;padding:26px 22px 22px;text-align:center;color:var(--cream);background:linear-gradient(170deg,#5a2e14,#2a140a 70%);border:3px solid var(--mustard);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:translateY(30px) scale(.95);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.bio-back.on .bio-card{transform:none}
+.bio-card:before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:linear-gradient(90deg,var(--mustard) 0 25%,var(--orange) 25% 50%,var(--rust) 50% 75%,var(--pink) 75%)}
+.bio-av{width:170px;height:170px;margin:6px auto 14px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:conic-gradient(var(--orange),var(--mustard),var(--pink),var(--orange));box-shadow:0 0 0 5px var(--mustard),0 0 0 10px var(--choc),0 0 40px rgba(242,177,52,.45)}
+.bio-av img{width:100%;height:100%;object-fit:cover}
+.bio-av span{font:56px Shrikhand,Georgia,serif;color:var(--cream);text-shadow:3px 3px 0 var(--brown)}
+.bio-card h3{font-size:clamp(28px,6vw,36px);color:var(--gold);text-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.bio-show{font-weight:800;font-size:16px;margin-top:2px}
+.bio-time{display:inline-block;margin:10px 0 14px;padding:6px 14px;border-radius:99px;background:rgba(255,243,220,.12);border:1.5px solid rgba(255,209,102,.5);color:var(--gold);font-weight:800;font-size:14px}
+.bio-text{font-size:16px;line-height:1.6;color:var(--cream);text-align:left}
+.bio-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.bio-src{display:block;margin-top:14px;font-size:13px;color:#e9cfa6}
+.bio-src a{color:var(--gold);font-weight:700}
+.bio-x{position:absolute;top:16px;right:14px;width:42px;height:42px;border-radius:50%;border:2px solid rgba(255,243,220,.5);background:rgba(42,20,10,.8);color:var(--cream);font-size:18px;cursor:pointer}
+.bio-x:hover{background:var(--pink);color:#2b0016}
 .host .av{width:76px;height:76px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;font:30px Shrikhand,Georgia,serif;color:var(--cream);background:conic-gradient(var(--orange),var(--mustard),var(--pink),var(--orange));box-shadow:0 0 0 4px var(--choc),0 10px 20px rgba(0,0,0,.4);transform:translateZ(40px);text-shadow:2px 2px 0 var(--brown)}
 .host .slot{font-weight:800;color:var(--gold);font-size:14px;transform:translateZ(20px)}
 .host.live{border-color:var(--pink);box-shadow:0 0 0 3px var(--pink),0 0 40px rgba(255,62,154,.4)}
@@ -426,10 +454,12 @@ footer a:hover{color:var(--gold);text-decoration:underline}
 <section class="sec s-rust" id="hosts">
   <svg class="wave" viewBox="0 0 1440 100" preserveAspectRatio="none"><defs><linearGradient id="gw1" x1="0" x2="1"><stop offset="0" stop-color="#8a3416"/><stop offset=".5" stop-color="#a8401a"/><stop offset="1" stop-color="#8a3416"/></linearGradient></defs><path d="M0,60 C180,10 320,100 520,60 C720,20 860,90 1060,55 C1240,25 1340,70 1440,45 L1440,100 L0,100 Z" fill="url(#gw1)"/></svg>
   <div class="wrap">
-    <div class="sec-head"><span class="kick">On The Air</span><h2>Your 70's Hosts</h2><p>Live mornings from the real That 70's Channel schedule. Times shown in Pacific and Eastern.</p></div>
+    <div class="sec-head"><span class="kick">On The Air</span><h2>Your 70's Hosts</h2><p>Meet the voices of That 70's Channel. Tap any host for their bio. Times shown in Pacific and Eastern.</p></div>
     <div class="tabs" id="dayTabs"></div>
     <div class="grid g-hosts" id="hostGrid"></div>
-    <p class="note">Outside these shows, it's the biggest hits of the 70's and more, around the clock.</p>
+    <p class="note">Schedule days follow Eastern time. Outside these shows, it's the biggest hits of the 70's and more, around the clock.</p>
+    <div class="feat-head"><h3>Specials &amp; Features</h3><p>More voices you'll hear on That 70's Channel.</p></div>
+    <div class="grid g-hosts" id="featGrid"></div>
   </div>
 </section>
 
@@ -633,6 +663,18 @@ footer a:hover{color:var(--gold);text-decoration:underline}
   <div class="pw-frame"><iframe id="pwIframe" title="That 70's Channel Live365 player" allow="autoplay; encrypted-media" loading="lazy"></iframe></div>
   <div class="pw-foot"><span>Minimize to keep the music going while you browse.</span><a href="https://live365.com/station/That-70-s-Channel-a09646" target="_blank" rel="noopener">Open full player ↗</a></div>
 </div>
+<div class="bio-back" id="bioModal" aria-hidden="true">
+  <div class="bio-card" role="dialog" aria-modal="true" aria-labelledby="bioName">
+    <button class="bio-x" id="bioClose" aria-label="Close bio">✕</button>
+    <div class="bio-av" id="bioAv"></div>
+    <h3 id="bioName"></h3>
+    <div class="bio-show" id="bioShow"></div>
+    <div class="bio-time" id="bioTime"></div>
+    <p class="bio-text" id="bioText"></p>
+    <div class="bio-actions"><button class="btn btn-hot" id="bioLive" data-listen><span class="live-dot"></span>On Air Now · Listen</button><span id="bioExtra"></span></div>
+    <span class="bio-src">Full profile on <a href="https://www.that70schannel.com/your-70s-hosts/" target="_blank" rel="noopener">that70schannel.com</a></span>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -742,27 +784,58 @@ function start3D(){try{
   s.onload=()=>{if(done)return;done=true;clearTimeout(fb);if(!(window.THREE&&start3D()))start2D()};
   s.onerror=()=>{if(done)return;done=true;clearTimeout(fb);start2D()};document.head.appendChild(s)})();
 
-/* ===== SCHEDULE / ON AIR (real shows from that70schannel.com; PT = ET − 3h) ===== */
+/* ===== SCHEDULE / ON AIR — real hosts & times from that70schannel.com/your-70s-hosts (defined in ET; PT = ET − 3h) ===== */
+const HOSTS_PAGE='https://www.that70schannel.com/your-70s-hosts/';
 const SHOWS=[
-  {name:'John Paul Breakfast Club',ini:'JP',days:[1,2,3,4,5],s:2,e:6,et:'5–9am ET',pt:'2–6am PT',blurb:'John Paul wakes up the East Coast with the biggest hits of the 70s and more.'},
-  {name:'Van Camp & Morgan Mornings',ini:'VM',days:[1,2,3,4,5],s:6,e:9,et:'9am–12pm ET',pt:'6–9am PT',blurb:'Great conversation, the latest weird news you can use, and lots of laughs.'},
-  {name:'We Play The Hits',ini:'🎙️',days:[6],s:3,e:null,et:'6am ET',pt:'3am PT',blurb:'The weekend show. Saturdays at 6am Eastern.'},
-  {name:'We Play The Hits (Encore)',ini:'🔁',days:[0],s:15,e:null,et:'6pm ET',pt:'3pm PT',blurb:'Missed Saturday? Catch the encore Sunday afternoon.'}
+  {id:'john-paul',name:'John Paul',show:'The Breakfast Club',photo:'john-paul',days:[1,2,3,4,5],s:5,e:9,when:'Mon–Fri',et:'5–9am ET',pt:'2–6am PT',bio:"A Kansas City native who has been in broadcasting since 1984. In 2005 he launched the internet station Channel Z The Edge in Tampa Bay, and today he hosts the Breakfast Club Morning Show, waking up the East Coast with the biggest hits of the 70s and more."},
+  {id:'van-camp-morgan',name:'Van Camp & Morgan',show:'Van Camp & Morgan Mornings',photo:'van-camp-morgan',days:[1,2,3,4,5],s:9,e:12,when:'Mon–Fri',et:'9am–12pm ET',pt:'6–9am PT',bio:"Their daily show is heard on internet and terrestrial stations around the world. They're known for “The Who Cares News,” now in its 10th year on the air and as a podcast. Expect great conversation, weird news you can use and lots of laughs."},
+  {id:'susan',name:'Susan',show:'Weekday Afternoons',photo:'susan',days:[1,2,3,4,5],s:13,e:16,when:'Mon–Fri',et:'1–4pm ET',pt:'10am–1pm PT',bio:"Susan spent more than 25 years in Northern California's theater and broadcasting community. Her radio work spans CCM, news, traffic and pop stations, and she also does freelance voice and production work."},
+  {id:'dj-rick',name:'DJ Rick',show:'Afternoon Drive',photo:'dj-rick',days:[1,2,3,4,5],s:16,e:20,when:'Mon–Fri',et:'4–8pm ET',pt:'1–5pm PT',bio:"More than 40 years behind the microphone. DJ Rick also handles traffic and weather for iHeartMedia in San Francisco, has worked in several California markets and runs his own mobile DJ business."},
+  {id:'ron',name:'Ron',show:'Weeknights',photo:'ron',days:[1,2,3,4,5],s:20,e:24,when:'Mon–Fri',et:'8pm–12am ET',pt:'5–9pm PT',bio:"Raised in San Francisco, Ron studied broadcasting at San Francisco State. He has worked at radio stations across California, including as a program director, and runs a mobile DJ company in Arizona."},
+  {id:'magic-mike',name:'Magic Mike',show:'Overnights',photo:'magic-mike',days:[1,2,3,4],s:1,e:5,when:'Mon–Thu',ptWhen:'Sun–Wed',et:'1–5am ET',pt:'10pm–2am PT',bio:"Magic Mike has a long history in Northern California radio. After years as a chef and general manager in restaurants and catering, he's back on the air playing pop, rock and R&B."},
+  {id:'charlie-tuna',name:'Charlie Tuna',show:"“The 70s” with Charlie Tuna",photo:'charlie-tuna',days:[6,0],s:9,e:12,when:'Sat & Sun',et:'9am–12pm ET',pt:'6–9am PT',bio:"A true radio legend: the first KHJ “Boss Jock” to receive a star on the Hollywood Walk of Fame. He's in the National Radio Hall of Fame and the Nebraska Broadcasters Hall of Fame, and was a founder of KROQ and KIIS."},
+  {id:'rich-appel',name:'Rich Appel',show:'That Thing with Rich Appel',days:[6],s:6,e:9,when:'Saturdays',et:'6–9am ET',pt:'3–6am PT',ini:'RA',link:'https://www.thatthingshow.com/',bio:"A three-hour weekend show celebrating classic radio: the jingles, the commercials and the hits from the era of fast-paced Top 40."},
+  {id:'rich-appel-encore',ref:'rich-appel',name:'Rich Appel',show:'That Thing (Encore)',days:[0],s:18,e:21,when:'Sundays',et:'6–9pm ET',pt:'3–6pm PT',ini:'RA',link:'https://www.thatthingshow.com/',bio:"Missed Saturday morning? The encore of That Thing with Rich Appel runs Sunday evening."},
+  {id:'tim',name:'Tim',show:'Weekends',photo:'tim',days:[6,0],s:null,when:'Weekends',bio:"Tim has worked at many Northern California stations, starting out at the San Joaquin Delta College radio station. Before radio he ran a vending and catering business and held retail management roles."},
+  {id:'merrick',name:'Merrick',show:'Weekends',photo:'merrick',days:[6,0],s:null,when:'Weekends',bio:"Merrick has managed film, music video, theatre and live event productions, including two stints with The Walt Disney Company. He also does voiceover work and has been friends with station owner Bud for nearly two decades."},
+  {id:'michael',name:'Michael',show:'Weekends',photo:'michael',days:[6,0],s:null,when:'Weekends',bio:"The 70s are Michael's musical first love. He has held on-air and off-air positions at stations in Sacramento, San Francisco and Los Angeles."}
+];
+const FEATURES=[
+  {id:'dennis',name:'Dennis Constantine',show:"Today's Top 10 Countdown",ini:'DC',when:'Several times every weekday',link:'https://www.that70schannel.com/top-10',bio:"Dennis counts down the top 10 songs from this day in 1970s history, backed by his deep knowledge of the decade's music."},
+  {id:'arnold',name:'Jay',show:"Arnold's Almanac",ini:'AA',when:'On the air',bio:"Jay started in radio in 1980 and has hosted shows at several California stations, including KHYL in Sacramento. In 2013 he created the Arnold Almanac, featuring music history highlights for each day."},
+  {id:'matias',name:'Matías Bombal',show:'Hollywood Movie Review',ini:'MB',when:'Weekends',bio:"Matías hosts a weekly review of the latest Hollywood releases. He comes from the Sacramento-area theater business and has hosted movie and jazz programs on TV and NPR stations."},
+  {id:'joshua',name:'Joshua Lane',show:"Here's To Your Health",ini:'JL',when:'Weekends',bio:"Wellness and nutrition expert Joshua Lane has hosted health shows on radio and TV for about three decades, including Channel 36 TV in Los Angeles and LA Talk Live."},
+  {id:'bud',name:'Bud Kress',show:'Owner · Program Director · Chief Engineer',ini:'BK',when:'Since 2002',bio:"Bud started That 70's Channel as an internet station on Live365 in 2002 and still runs it as owner, program director and chief engineer."}
 ];
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function ptNow(){const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());const g=k=>f.find(p=>p.type===k).value;return{d:DAYS.indexOf(g('weekday')),h:(+g('hour'))%24+(+g('minute'))/60}}
-function liveShow(n){return SHOWS.find(s=>s.e!==null&&s.days.includes(n.d)&&n.h>=s.s&&n.h<s.e)}
-function nextShow(n){for(let k=0;k<8;k++){const d=(n.d+k)%7;const list=SHOWS.filter(s=>s.days.includes(d)&&(k>0||s.s>n.h)).sort((a,b)=>a.s-b.s);if(list.length)return{s:list[0],k}}return null}
-function renderOnAir(){const n=ptNow(),L=liveShow(n);
-  if(L){$('#onairName').textContent=L.name;$('#onairTime').textContent=L.pt+' · '+L.et+' · live now'}
+function etNow(){const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());const g=k=>f.find(p=>p.type===k).value;return{d:DAYS.indexOf(g('weekday')),h:(+g('hour'))%24+(+g('minute'))/60}}
+function liveShow(n){return SHOWS.find(s=>s.s!==null&&s.days.includes(n.d)&&n.h>=s.s&&n.h<s.e)}
+function nextShow(n){for(let k=0;k<8;k++){const d=(n.d+k)%7;const list=SHOWS.filter(s=>s.s!==null&&s.days.includes(d)&&(k>0||s.s>n.h)).sort((a,b)=>a.s-b.s);if(list.length)return{s:list[0],k}}return null}
+function renderOnAir(){const n=etNow(),L=liveShow(n);
+  if(L){$('#onairName').textContent=L.name+(L.name!==L.show?' · '+L.show:'');$('#onairTime').textContent=L.pt+' · '+L.et+' · live now'}
   else{const nx=nextShow(n);$('#onairName').textContent="The Biggest Hits of the 70's & More";$('#onairTime').textContent=nx?('Up next: '+nx.s.name+' · '+(nx.k===0?'today':nx.k===1?'tomorrow':DAYS[(n.d+nx.k)%7])+' '+nx.s.pt):'Non-stop 70s hits'}
   renderHosts()}
-let tabDay=ptNow().d;
-function renderTabs(){const t=$('#dayTabs');t.innerHTML='';[1,2,3,4,5,6,0].forEach(d=>{const b=document.createElement('button');b.className='tab'+(d===tabDay?' on':'');b.textContent=DAYS[d]+(d===ptNow().d?' • Today':'');b.onclick=()=>{tabDay=d;Sfx.tap();renderTabs();renderHosts()};t.appendChild(b)})}
-function renderHosts(){const g=$('#hostGrid'),n=ptNow(),L=liveShow(n);g.innerHTML='';const list=SHOWS.filter(s=>s.days.includes(tabDay));
+let tabDay=etNow().d;
+function renderTabs(){const t=$('#dayTabs');t.innerHTML='';[1,2,3,4,5,6,0].forEach(d=>{const b=document.createElement('button');b.className='tab'+(d===tabDay?' on':'');b.textContent=DAYS[d]+(d===etNow().d?' • Today':'');b.onclick=()=>{tabDay=d;Sfx.tap();renderTabs();renderHosts()};t.appendChild(b)})}
+function avatar(h){return h.photo?'<div class="av ph"><img src="assets/hosts/'+h.photo+'.jpg" alt="'+h.name+'" loading="lazy" width="160" height="160"></div>':'<div class="av">'+h.ini+'</div>'}
+function hostCard(h,live){const c=document.createElement('button');c.type='button';c.className='card tilt host'+(live?' live':'');c.dataset.host=h.id;c.setAttribute('aria-label','About '+h.name);
+  c.innerHTML=(live?'<span class="livetag">● ON AIR</span>':'')+avatar(h)+'<h3>'+h.name+'</h3>'+(h.show&&h.show!==h.name&&h.show!=='Weekends'?'<div class="showname">'+h.show+'</div>':'')+'<div class="slot">'+(h.s!==null&&h.s!==undefined?(h.ptWhen||h.when)+' · '+h.pt+'<br><small>'+h.when+' · '+h.et+'</small>':h.when)+'</div><span class="bio-hint">Tap for bio ↗</span>';
+  c.onclick=()=>openBio(h,live);tilt(c);return c}
+function renderHosts(){const g=$('#hostGrid'),n=etNow(),L=liveShow(n);g.innerHTML='';const list=SHOWS.filter(s=>s.days.includes(tabDay)).sort((a,b)=>(a.s??99)-(b.s??99));
   if(!list.length){g.innerHTML='<div class="empty">No live shows on the schedule this day — just the biggest hits of the 70\'s and more, all day long.</div>';return}
-  list.forEach(s=>{const live=L===s&&tabDay===n.d;const c=document.createElement('div');c.className='card tilt host'+(live?' live':'');c.innerHTML=(live?'<span class="livetag">● ON AIR</span>':'')+'<div class="av">'+s.ini+'</div><h3>'+s.name+'</h3><div class="slot">'+s.pt+' · '+s.et+'</div><p>'+s.blurb+'</p>';g.appendChild(c);tilt(c)})}
-renderTabs();renderOnAir();setInterval(renderOnAir,60000);
+  list.forEach(s=>g.appendChild(hostCard(s,L===s&&tabDay===n.d)))}
+function renderFeatures(){const g=$('#featGrid');FEATURES.forEach(f=>g.appendChild(hostCard(Object.assign({s:null},f),false)))}
+/* bio pop-up */
+function openBio(h,live){const m=$('#bioModal');$('#bioAv').innerHTML=h.photo?'<img src="assets/hosts/'+h.photo+'.jpg" alt="'+h.name+'">':'<span>'+h.ini+'</span>';
+  $('#bioName').textContent=h.name;$('#bioShow').textContent=h.show&&h.show!==h.name?h.show:'';
+  $('#bioTime').textContent=(h.s!==null&&h.s!==undefined)?((h.ptWhen||h.when)+' '+h.pt+' · '+h.when+' '+h.et):h.when;
+  $('#bioText').textContent=h.bio;$('#bioLive').style.display=live?'inline-flex':'none';
+  const ex=$('#bioExtra');ex.innerHTML='';if(h.link){const a=document.createElement('a');a.href=h.link;a.target='_blank';a.rel='noopener';a.className='btn btn-ghost';a.textContent=h.id==='dennis'?"Today's Top 10 ↗":'Visit the show ↗';ex.appendChild(a)}
+  m.classList.add('on');m.setAttribute('aria-hidden','false');Sfx.scratch();setTimeout(()=>$('#bioClose').focus(),50)}
+function closeBio(){const m=$('#bioModal');m.classList.remove('on');m.setAttribute('aria-hidden','true')}
+$('#bioClose').onclick=closeBio;$('#bioModal').addEventListener('click',e=>{if(e.target.id==='bioModal')closeBio()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#bioModal').classList.contains('on'))closeBio()});
+renderTabs();renderOnAir();renderFeatures();setInterval(renderOnAir,60000);
 
 /* ===== 3D TILT CARDS ===== */
 function tilt(el){if(el._t)return;el._t=1;el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(800px) rotateY(${px*14}deg) rotateX(${-py*14}deg) translateY(-4px)`});el.addEventListener('pointerleave',()=>el.style.transform='')}
@@ -770,7 +843,7 @@ $$('.tilt').forEach(tilt);
 
 /* ===== POP-UP PLAYER ===== */
 const P=$('#player'),PB=$('#plBack'),IF=$('#pwIframe');
-function openPlayer(){if(!IF.src||IF.src==='about:blank')IF.src=PLAYER_URL;P.classList.remove('mini');P.classList.add('on');PB.classList.add('on');P.setAttribute('aria-hidden','false');$('#pwSub').textContent='Live on Live365';Sfx.tap()}
+function openPlayer(){closeBio();if(!IF.src||IF.src==='about:blank')IF.src=PLAYER_URL;P.classList.remove('mini');P.classList.add('on');PB.classList.add('on');P.setAttribute('aria-hidden','false');$('#pwSub').textContent='Live on Live365';Sfx.tap()}
 function miniPlayer(){P.classList.add('mini');PB.classList.remove('on');$('#pwSub').textContent='Playing · tap to expand'}
 function closePlayer(){P.classList.remove('on','mini');PB.classList.remove('on');P.setAttribute('aria-hidden','true');IF.src='about:blank'}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-listen]');if(b){e.preventDefault();openPlayer()}});
