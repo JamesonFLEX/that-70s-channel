@@ -801,11 +801,11 @@ const SHOWS=[
   {id:'michael',name:'Michael',show:'Weekends',photo:'michael',days:[6,0],s:null,when:'Weekends',bio:"The 70s are Michael's musical first love. He has held on-air and off-air positions at stations in Sacramento, San Francisco and Los Angeles."}
 ];
 const FEATURES=[
+  {id:'bud',name:'Bud Kress',show:'Founder · Owner · Program Director · Chief Engineer',photo:'bud-kress',ini:'BK',when:'Founded the station in 2002',bio:"Bud started That 70's Channel as an internet station on Live365 in 2002 and still runs it as owner, program director and chief engineer."},
   {id:'dennis',name:'Dennis Constantine',show:"Today's Top 10 Countdown",ini:'DC',when:'Several times every weekday',link:'https://www.that70schannel.com/top-10',bio:"Dennis counts down the top 10 songs from this day in 1970s history, backed by his deep knowledge of the decade's music."},
   {id:'arnold',name:'Jay',show:"Arnold's Almanac",ini:'AA',when:'On the air',bio:"Jay started in radio in 1980 and has hosted shows at several California stations, including KHYL in Sacramento. In 2013 he created the Arnold Almanac, featuring music history highlights for each day."},
   {id:'matias',name:'Matías Bombal',show:'Hollywood Movie Review',ini:'MB',when:'Weekends',bio:"Matías hosts a weekly review of the latest Hollywood releases. He comes from the Sacramento-area theater business and has hosted movie and jazz programs on TV and NPR stations."},
-  {id:'joshua',name:'Joshua Lane',show:"Here's To Your Health",ini:'JL',when:'Weekends',bio:"Wellness and nutrition expert Joshua Lane has hosted health shows on radio and TV for about three decades, including Channel 36 TV in Los Angeles and LA Talk Live."},
-  {id:'bud',name:'Bud Kress',show:'Owner · Program Director · Chief Engineer',ini:'BK',when:'Since 2002',bio:"Bud started That 70's Channel as an internet station on Live365 in 2002 and still runs it as owner, program director and chief engineer."}
+  {id:'joshua',name:'Joshua Lane',show:"Here's To Your Health",ini:'JL',when:'Weekends',bio:"Wellness and nutrition expert Joshua Lane has hosted health shows on radio and TV for about three decades, including Channel 36 TV in Los Angeles and LA Talk Live."}
 ];
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 function etNow(){const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());const g=k=>f.find(p=>p.type===k).value;return{d:DAYS.indexOf(g('weekday')),h:(+g('hour'))%24+(+g('minute'))/60}}
